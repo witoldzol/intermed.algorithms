@@ -26,7 +26,33 @@ function sumAll(arr) {
 
 sumAll(arr);
 
-// -------------------  2 -----
+// -------------------  2 ----- remove all repeating elements in two arrays
+
+function diffArray(arr1, arr2) {
+  
+  var newArr=arr1.concat(arr2);
+  //return newArr.indexOf(3);
+  
+  var arrTest = {};
+  for(i=0; i<newArr.length; i++){
+    var a =newArr[i];
+    arrTest[a] = arrTest[a] ? '' : arrTest.push(a);
+  }
+  
+  
+  return arrTest.filter(function(x){
+    return x!=="";
+    
+  });
+  
+  
+  
+  
+}
+
+diffArray(["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
+
+
 // -------------------  2 -----
 // -------------------  2 -----
 // -------------------  2 -----
