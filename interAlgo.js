@@ -28,30 +28,31 @@ sumAll(arr);
 
 // -------------------  2 ----- remove all repeating elements in two arrays
 
+
 function diffArray(arr1, arr2) {
   
   var newArr=arr1.concat(arr2);
   //return newArr.indexOf(3);
   
-  var arrTest = {};
+  var obj = {};
   for(i=0; i<newArr.length; i++){
     var a =newArr[i];
-    arrTest[a] = arrTest[a] ? '' : arrTest.push(a);
+    
+    obj[a] = obj[a] ? "duplicate" : "notDuplicate";
+    
   }
   
   
-  return arrTest.filter(function(x){
-    return x!=="";
-    
-  });
+  var testArr = [obj];
+ 
   
+  //return obj;
+  var test = Object.keys(obj).filter(function(key){
+     
+  });  
   
-  
-  
-}
 
-diffArray(["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
-
+diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
 
 // -------------------  2 -----
 // -------------------  2 -----
