@@ -29,31 +29,55 @@ sumAll(arr);
 // -------------------  2 ----- remove all repeating elements in two arrays
 
 
-function diffArray(arr1, arr2) {
   
-  var newArr=arr1.concat(arr2);
-  //return newArr.indexOf(3);
+  function dupCheck(){
+    var shifter = newArr.shift();
+    
+    var testArr = newArr.map(function(x){
+
+        if(shifter == x){
+          return "dupli";
+        } return "";
+     });   
   
-  var obj = {};
-  for(i=0; i<newArr.length; i++){
-    var a =newArr[i];
-    
-    obj[a] = obj[a] ? "duplicate" : "notDuplicate";
-    
+    var dupli = testArr.filter(function(x){
+      return x!=="";
+
+    });
+
+    if(dupli[0] == "dupli"){
+      return;
+    }notDupli.push(shifter);
+
   }
   
   
-  var testArr = [obj];
- 
+  for(i=0; i<newArr.length; i++){
+
+    dupCheck();
+    
   
-  //return obj;
-  var test = Object.keys(obj).filter(function(key){
-     
-  });  
+  }
+  
+  return notDupli;
+  
+  
+  
+  /*
+  var obj = {};
+  for(i=0; i<newArr.length; i++){
+    var a =newArr[i]; 
+    obj[a] = obj[a] ? "duplicate" : "notDuplicate";
+    
+    
+  }
+  
+  return Object.keys(obj).filter(function(key){
+        return obj;
+  });
+  
+  */
+} 
   
 
 diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
-
-// -------------------  2 -----
-// -------------------  2 -----
-// -------------------  2 -----
