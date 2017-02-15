@@ -28,56 +28,43 @@ sumAll(arr);
 
 // -------------------  2 ----- remove all repeating elements in two arrays
 
+// 
 
+function diffArray(arr1, arr2) {
   
-  function dupCheck(){
-    var shifter = newArr.shift();
-    
-    var testArr = newArr.map(function(x){
-
-        if(shifter == x){
-          return "dupli";
-        } return "";
-     });   
+  var newArr=arr1.concat(arr2);
   
-    var dupli = testArr.filter(function(x){
-      return x!=="";
-
-    });
-
-    if(dupli[0] == "dupli"){
-      return;
-    }notDupli.push(shifter);
-
-  }
-  
-  
-  for(i=0; i<newArr.length; i++){
-
-    dupCheck();
-    
-  
-  }
-  
-  return notDupli;
-  
-  
-  
-  /*
   var obj = {};
+  
   for(i=0; i<newArr.length; i++){
     var a =newArr[i]; 
-    obj[a] = obj[a] ? "duplicate" : "notDuplicate";
+    obj[a] = obj[a] ? "d" : "nd";
     
     
   }
+
   
-  return Object.keys(obj).filter(function(key){
-        return obj;
-  });
   
-  */
-} 
+var test = Object.keys(obj).filter(function(key) {
+    //return keys with value of "nd"
+    return obj[key] == "nd";
+});
+  
+  
+var finalArr =[];  
+  
+  for (i=0; i<test.length; i++){
+    finalArr =[];
+    if(Number(test[i]) === null){
+      finalArr.push(Number(test[i]));
+       
+       }finalArr.push(test[i]) ;
+    
+  }
+  return finalArr;
+
+  
+}
   
 
-diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+diffArray([1, "calf", 3, "piglet"], [1, "calf", 3, 4]);
