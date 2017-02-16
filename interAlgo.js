@@ -28,43 +28,51 @@ sumAll(arr);
 
 // -------------------  2 ----- remove all repeating elements in two arrays
 
-// 
 
 function diffArray(arr1, arr2) {
   
+  //combine both arrays
   var newArr=arr1.concat(arr2);
   
-  var obj = {};
   
+  //NO IDEA HOW IT WORKS BUT ITS AMAZING! 
+  //it will return object with unique keys, and assign whatever value we want!
+  var obj = {};
+  //create object and tag keys with dupli / not dupli values
   for(i=0; i<newArr.length; i++){
     var a =newArr[i]; 
     obj[a] = obj[a] ? "d" : "nd";
-    
-    
   }
 
   
+  //filter out duplicate 
+  var arr =Object.keys(obj).filter(function(key) {
+      //return keys with value of "nd"
+      return obj[key]== "nd";
+  });
+ 
+ //container for final array 
+ var finalArr =[];  
+ //because filtered keys from object are all returned as strings
+  //we test all items, if they are true stings they will not pass 'isNaN' test
+  function isItANumber(){ 
+    for (i=0; i<arr.length; i++){
+      if(isNaN(arr[i])){
+        //if element is NaN, ie real string, we just push original value without changing it
+        finalArr.push(arr[i]);
+      } else
+      // if we multiply * 1 js will automatically convert string number to 'true' number  
+      finalArr.push(arr[i] * 1);
+
+    }
+ }
   
-var test = Object.keys(obj).filter(function(key) {
-    //return keys with value of "nd"
-    return obj[key] == "nd";
-});
-  
-  
-var finalArr =[];  
-  
-  for (i=0; i<test.length; i++){
-    finalArr =[];
-    if(Number(test[i]) === null){
-      finalArr.push(Number(test[i]));
-       
-       }finalArr.push(test[i]) ;
-    
-  }
-  return finalArr;
+ //run function 
+ isItANumber(); 
+ 
+ return finalArr;
 
   
 }
-  
 
-diffArray([1, "calf", 3, "piglet"], [1, "calf", 3, 4]);
+// -------------------  3 ----- Roman Numeral Converter (convert normal number to roman numerals)
