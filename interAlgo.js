@@ -214,15 +214,38 @@ convertToRoman(950);
 
 // -------------------  4 ----- Return objects that contain items from test object.
 
-
 function whatIsInAName(collection, source) {
   // What's in a name?
   var arr = [];
   // Only change code below this line
   
+  var keySource=  Object.keys(source);
+  var keyCollection=  Object.keys(collection);
+  return keyCollection;
+  //loop through properties of 'source'
+  for(i=0; i<keySource.length; i++){
+      
+    //loop through properties of "collection" and compare them to "source"
+    for(j=0, i; j<keyCollection.lenght, keySource; j++){
+      return keyCollection[j];
+      if(Object.is(keyCollection[j],keySource[i])){
+        arr.push(collection[j]);
+      } 
+      
+      
+      
+    }
+  
+  }
+ 
+  return arr;  
   
   var obj = Object.keys(collection);
-  
+    //object.is compares two values of provided objects, returns false/true
+    if( Object.is(collection[2].last,source.last)){
+       arr.push(collection[2]);
+    }
+    return arr;
   
   var test = collection.map(function(x){
     return x== Object.keys(source);
@@ -243,6 +266,4 @@ function whatIsInAName(collection, source) {
   return arr;
 }
 
-whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
-
-
+whatIsInAName([{ "a": 1, "b": 2 }, { "a": 1 }, { "a": 1, "b": 2, "c": 2 }], { "a": 1, "b": 2 });
