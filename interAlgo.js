@@ -210,3 +210,39 @@ function convertToRoman(num) {
 }
 
 convertToRoman(950);
+
+
+// -------------------  4 ----- Return objects that contain items from test object.
+
+
+function whatIsInAName(collection, source) {
+  // What's in a name?
+  var arr = [];
+  // Only change code below this line
+  
+  
+  var obj = Object.keys(collection);
+  
+  
+  var test = collection.map(function(x){
+    return x== Object.keys(source);
+    
+  });
+  
+
+    for(var prop in collection[0]){
+    return prop +":"+ collection[prop];
+  }
+  
+  
+  
+  
+  
+  
+  // Only change code above this line
+  return arr;
+}
+
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+
