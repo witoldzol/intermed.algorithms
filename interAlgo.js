@@ -221,49 +221,23 @@ function whatIsInAName(collection, source) {
   
   var keySource=  Object.keys(source);
   var keyCollection=  Object.keys(collection);
-  return keyCollection;
-  //loop through properties of 'source'
+  var valSource = Object.values(source);
+  var valCollection = Object.values(collection);
+  
+  
+  
   for(i=0; i<keySource.length; i++){
-      
-    //loop through properties of "collection" and compare them to "source"
-    for(j=0, i; j<keyCollection.lenght, keySource; j++){
-      return keyCollection[j];
-      if(Object.is(keyCollection[j],keySource[i])){
-        arr.push(collection[j]);
-      } 
-      
-      
-      
-    }
   
-  }
- 
-  return arr;  
-  
-  var obj = Object.keys(collection);
-    //object.is compares two values of provided objects, returns false/true
-    if( Object.is(collection[2].last,source.last)){
-       arr.push(collection[2]);
-    }
-    return arr;
-  
-  var test = collection.map(function(x){
-    return x== Object.keys(source);
-    
-  });
-  
+      for(var prop in collection){
 
-    for(var prop in collection[0]){
-    return prop +":"+ collection[prop];
+          console.log(collection[prop].hasOwnProperty(keySource[i]));
+    console.log(Object.values(collection[prop])==valSource[i]);
+      }
+
   }
-  
-  
-  
-  
-  
   
   // Only change code above this line
-  return arr;
+ 
 }
 
 whatIsInAName([{ "a": 1, "b": 2 }, { "a": 1 }, { "a": 1, "b": 2, "c": 2 }], { "a": 1, "b": 2 });
