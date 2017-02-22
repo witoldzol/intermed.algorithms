@@ -219,23 +219,35 @@ function whatIsInAName(collection, source) {
   var arr = [];
   // Only change code below this line
   
-  var keySource=  Object.keys(source);
-  var keyCollection=  Object.keys(collection);
-  var valSource = Object.values(source);
-  var valCollection = Object.values(collection);
+  var keySource=  Object.keys(source); //[a,b]
   
+  var keyCollection=  Object.keys(collection); //[0,1,2]
   
+  var valSource = Object.values(source); //[1,2]
   
-  for(i=0; i<keySource.length; i++){
+  var valCollection = Object.values(collection); //[obj,obj,obj]
+
+  var arr =[];
+  
+
+    
+    
   
       for(var prop in collection){
-
-          console.log(collection[prop].hasOwnProperty(keySource[i]));
-    console.log(Object.values(collection[prop])==valSource[i]);
+        
+        
+          
+         for(i=0; i<keySource.length; i++){
+            var t = keySource[i].toString();
+          if(collection[prop].hasOwnProperty(keySource[i]) && collection[prop][t] == valSource[i]){
+            arr.push(keySource[i]+':'+valSource[i]);
+          } 
+         } 
+         
       }
 
-  }
-  
+    
+    return arr;
   // Only change code above this line
  
 }
