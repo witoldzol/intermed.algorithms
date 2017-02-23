@@ -213,10 +213,9 @@ convertToRoman(950);
 
 
 // -------------------  4 ----- Return objects that contain items from test object.
-
 function whatIsInAName(collection, source) {
   // What's in a name?
-  var arr = [];
+  
   // Only change code below this line
   
   var keySource=  Object.keys(source); //[a,b]
@@ -227,29 +226,39 @@ function whatIsInAName(collection, source) {
   
   var valCollection = Object.values(collection); //[obj,obj,obj]
 
-  var arr =[];
-  
-
-    
-    
-  
+  var arr=[];
+   
       for(var prop in collection){
         
-        
+       
           
-         for(i=0; i<keySource.length; i++){
-            var t = keySource[i].toString();
-          if(collection[prop].hasOwnProperty(keySource[i]) && collection[prop][t] == valSource[i]){
-            arr.push(keySource[i]+':'+valSource[i]);
-          } 
-         } 
-         
-      }
+        
+          var t = keySource[0].toString();
+          var g = keySource[1].toString(); 
+        
+         if(keySource.length == 2){
+            if(collection[prop].hasOwnProperty(keySource[0]) && collection[prop][t]  == valSource[0] ){
 
-    
+
+                if(collection[prop].hasOwnProperty(keySource[1]) && collection[prop][g] == valSource[1]){
+                  arr.push(collection[prop]); 
+                }  
+            }    
+         }else if (keySource.length ==1){
+           if(collection[prop].hasOwnProperty(keySource[0]) && collection[prop][t]  == valSource[0] ){
+              arr.push(collection[prop]);  
+           }
+         } 
+           
+            
+         
+           
+         
+        
+      }
     return arr;
   // Only change code above this line
  
 }
 
-whatIsInAName([{ "a": 1, "b": 2 }, { "a": 1 }, { "a": 1, "b": 2, "c": 2 }], { "a": 1, "b": 2 });
+whatIsInAName([{ "a": 1 }, { "a": 1 }, { "a": 1, "b": 2 }], { "a": 1 });
