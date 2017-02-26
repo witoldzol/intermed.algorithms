@@ -220,45 +220,62 @@ function whatIsInAName(collection, source) {
   
   var keySource=  Object.keys(source); //[a,b]
   
-  var keyCollection=  Object.keys(collection); //[0,1,2]
+  var l = keySource.length;
   
   var valSource = Object.values(source); //[1,2]
   
-  var valCollection = Object.values(collection); //[obj,obj,obj]
-
   var arr=[];
-   
-      for(var prop in collection){
-        
-       
-          
-        
-          var t = keySource[0].toString();
-          var g = keySource[1].toString(); 
-        
-         if(keySource.length == 2){
-            if(collection[prop].hasOwnProperty(keySource[0]) && collection[prop][t]  == valSource[0] ){
+  
+  var arrCheck=[];
+  
+  var arrFinal = [];
+  
+  var arrTemp =[];
+  
+  //function to test if all elements in array are equal to 'true'
+  function isTrue(y,array){
+    return y === true;
+  }
+  
+  //main loop, that goes through 'collection' array of objects properties
+  for(var prop in collection){
 
+     //inner loop that goes tests if properties and values in 'source' array exist in 'collection'
+    for(i=0; i<l; i++){
 
-                if(collection[prop].hasOwnProperty(keySource[1]) && collection[prop][g] == valSource[1]){
-                  arr.push(collection[prop]); 
-                }  
-            }    
-         }else if (keySource.length ==1){
-           if(collection[prop].hasOwnProperty(keySource[0]) && collection[prop][t]  == valSource[0] ){
-              arr.push(collection[prop]);  
-           }
-         } 
-           
-            
-         
-           
-         
-        
-      }
-    return arr;
+      if(collection[prop].hasOwnProperty(keySource[i]) && collection[prop][keySource[i]]  == valSource[i] ){
+            //if we find property and value, we push 'true' to test array 'arrCheck'
+           arrCheck.push(true);  
+         } else{
+            //if we find that property/value doesn't match 'collection' object, we push 'false' into test array
+            arrCheck.push(false);             
+         }
+    }
+
+    //after we loop through first object, we can check arrCheck
+    //if arrCheck has all items equal to 'true' that means, all objects in 'source' are present in 'collection' object
+    //and we can push that object into our final array
+    if( arrCheck.every(isTrue)){
+      arrFinal.push(collection[prop]);
+    } 
+    //clear arrCheck for new run
+    arrCheck = [];
+  }
+      
+    //gg no re  
+    return arrFinal;  
+    
+  
+ 
+
   // Only change code above this line
  
 }
 
-whatIsInAName([{ "a": 1 }, { "a": 1 }, { "a": 1, "b": 2 }], { "a": 1 });
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+
+// -------------------  5 ----- 
+
+// -------------------  4 ----- Return objects that contain items from test object.
+// -------------------  4 ----- Return objects that contain items from test object.
