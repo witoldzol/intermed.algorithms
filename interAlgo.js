@@ -275,7 +275,102 @@ function whatIsInAName(collection, source) {
 whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
 
 
-// -------------------  5 ----- 
+// -------------------  5 ----- Find a word in a string and replace it with new word preserving capitalization of first letter (EASY AS FOK)
+// this challange is a joke after challange nb. 4, what the actual fuck?!
 
-// -------------------  4 ----- Return objects that contain items from test object.
-// -------------------  4 ----- Return objects that contain items from test object.
+function myReplace(str, before, after) {
+
+  var strAfter ="";
+  var character = before.charAt(0); // 'before' first character
+  var characterAfter = after.charAt(0); //'after' first character
+  var afterArr =after.split("");
+  var splice = afterArr.splice(0,1); 
+  var afterSplice = afterArr.join(""); //'after' string without first letter+
+  //we take firt character and capitalize it, and concatenate rest unchanged
+  var capitalizedAfter = characterAfter.toUpperCase() + afterSplice;
+  
+  //lets test if the first character of word that we replace is a number
+  // we do this because if we test for lower/upper case, number will return 'true' on both tests
+  if(!isNaN(character * 1)){
+    //if it's a number, just replace and enjoy beer 
+     strAfter = str.replace(before, after);
+    //if the first letter of word we replace is upper case
+  } else if (character == character.toUpperCase()){
+     //we replace with after that has capitalized first letter
+     strAfter = str.replace(before, capitalizedAfter);   
+      //if the first letter of word we replace is lower case, we just replace without changes
+    } else if (character == character.toLowerCase()){
+      strAfter = str.replace(before, after);
+    }
+   
+  
+  return strAfter;
+}
+
+myReplace("He is Sleeping on the couch", "Sleeping", "sitting");
+
+
+// -------------------  6 ----- Pig Latin: find first vowel in string, start new word from that point, concatenate substring that was before
+// and finally add 'ay' eg. glove = oveglay (ove + gl + ay)
+
+
+function translatePigLatin(str) {
+ // A, E, I, O, U, and sometimes Y. - vowels
+ // Y is a consonant if it appears as first letter in the word (since examples are don't include 'y', I won't bother implementing)
+  var test =[];
+ //we pass string (x), and lowest index ie. first vowel we find in the string
+ function pigLatin (x, index) {
+   //substring that starts from first vowel
+   var sub = x.substr(index);
+   //substring that appears before first vowel
+   var preSub = x.substr(0,index);
+   return sub + preSub + "ay";
+ } 
+  
+ //I started making case for y and !y, but didn't bother finishing case if == y 
+ if(str.charAt(0) !== "y"){
+    //we loop through string looking for vowels
+    for(i=0; i<str.length; i++){
+       //simple switch that finds and pushes index of vowels to holding array
+       switch (str.charAt(i)){
+         case "a":
+           test.push(i);
+           break;
+         case "e":
+           test.push(i);
+           break;
+         case "i":
+           test.push(i);
+           break;
+         case "o":
+           test.push(i);
+           break;
+         case "u":
+           test.push(i);
+           break;
+         case "y":
+           test.push(i);
+           break;
+       }
+    } 
+ } 
+  //because array will naturally start with lowest index, 
+  //we can simply take first element knowing it points to first encountered vowel
+  var index = test[0];
+  
+  //if string starts with vowel, ie index = 0, we just concatenate 'way' 
+  if(index === 0){
+    return str + "way";
+    // otherwise we run our function, and go get a beer
+    } else {
+    return pigLatin(str, index);
+  }
+  
+}
+
+translatePigLatin("glove");
+
+// -------------------  7 ----- 
+// -------------------  7 ----- 
+// -------------------  7 ----- 
+// -------------------  7 ----- 
