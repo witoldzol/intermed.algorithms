@@ -370,7 +370,72 @@ function translatePigLatin(str) {
 
 translatePigLatin("glove");
 
-// -------------------  7 ----- 
-// -------------------  7 ----- 
-// -------------------  7 ----- 
-// -------------------  7 ----- 
+// -------------------  7 ----- DNA pairings (simple algo that teaches how to use 'push' and 'map' methods)
+
+function pairElement(str) {
+  //lets create array out of string characters
+  var arr = str.split("");
+  var test =[];
+  //map method will go each element in array 
+  arr.map(function(x){
+    var c = ["C", "G"];
+    var g = ["G", "C"];
+    var t = ["T", "A"];
+    var a = ["A", "T"];
+    //we identify each of 4 possible characters in array, and push pairing array into our test array
+    if(x=="C"){
+       test.push(c);
+    } else if(x=="G"){
+       test.push(g);
+    } else if(x=="T"){
+      test.push(t);
+    } else if(x=="A"){
+      test.push(a);
+    }
+    
+  });
+  //beer and music
+  return test;
+}
+
+pairElement("GCG");
+
+
+// -------------------  8 ----- 
+// -------------------  9 ----- find unique values in arrays, and arrange them in single array while preserving their original order
+
+function uniteUnique(arr) {
+  
+  var test=[];
+  //get all the arguments into single array
+  var arrFull = Array.from(arguments);
+  //flatten the array using .reduce()
+  var arrFlat = arrFull.reduce(function(x,y){
+    
+    return x.concat(y);
+    
+  });
+  //create new array with unique entries
+  arrFlat.reduce(function(allNumbers, number){
+    //
+    if(number in allNumbers){
+      //do nothing if there is already a number in allNumbers
+    } else {
+      //if we find unique number, we push it into 
+      test.push(number);
+    }
+    //return modified array to preserve additions
+    return test;
+    //don't forget to add {}/[] - it is optional second argument 
+    //(sets starting value of accumulator(in this instance, 'allNumbers))
+  },{});
+  
+  
+ //go get beer!... and don't forget to consider going vegan while you are at it 
+ return test;
+  
+}
+
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+
+// -------------------  10 ----- 
