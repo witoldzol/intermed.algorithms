@@ -439,3 +439,34 @@ function uniteUnique(arr) {
 uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
 
 // -------------------  10 ----- 
+//--------------------- 11 -----  use .replace and regEx to replace symbols in stings, also chain method
+
+
+function convertHTML(str) {
+  //elements to be replaced & unicode numbers for them
+  
+  /* html  \u{hhhhh}
+  & &amp; 00026
+  < &lt; 0003C
+  > &gt; 0003E
+  " &quot; 00022
+  ' &apos; 00027 
+  */
+ 
+//let's chain .replace()
+//for elements  that occur more than once (eg "<"), we use regEx with global parameter /g
+//we also use regEx and unicode for 'tricky' elements like quotes and apostrophes
+//in order to use unicode matching we have to add /u 'flag' 
+var test = str.replace("&","&amp;").replace(/\u{0003C}/ug, "&lt;").replace(">","&gt;").replace(/\u{00022}/ug,"&quot;").replace(/\u{00027}/ug,"&apos;"); 
+  
+ // win 
+  return test;
+}
+
+convertHTML('Stuff in "quotation marks"');
+
+// -------------------  12 ----- 
+// -------------------  12 ----- 
+// -------------------  12 ----- 
+// -------------------  12 ----- 
+// -------------------  12 ----- 
