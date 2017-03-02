@@ -465,8 +465,70 @@ var test = str.replace("&","&amp;").replace(/\u{0003C}/ug, "&lt;").replace(">","
 
 convertHTML('Stuff in "quotation marks"');
 
-// -------------------  12 ----- 
-// -------------------  12 ----- 
+// -------------------  12 ----- practice using boundaries in RegEx
+
+function spinalCase(str) {
+    
+  // Matches a non-word boundary. This is a position where the previous and next character are of the same type: Either both   must be words, or both must be non-words. Such as between two letters or between two spaces. The beginning and end of a     string are considered non-words. Same as the matched word boundary, the matched non-word bondary is also not included in     the match.
+
+  //For example, /\Bon/ matches "on" in "at noon", and /ye\B/ matches "ye" in "possibly yesterday".
+  //\s matches whitespace
+  str = str.replace(/\B([A-Z])/g, " $1").replace(/\s/g,"-").replace(/_/g, "").toLowerCase();
+  
+  return str;
+}
+
+spinalCase('The_Andy_Griffith_Show');
+
+// -------------------  13 ----- create fibonacci number generator
+
+function sumFibs(num) {
+  
+  var arr= [1,1];
+  var limit = 0;
+  
+  //function
+  function fibo (x){
+    var test =[];
+    //take last two items in array
+    test = arr.slice(-2,arr.length);
+    
+    
+    //reduce those two items to one
+    limit = test.reduce(function(sum,current){
+      return sum + current;
+    });
+    //push it to the end of array if the limit number is below or equal 'num'
+    if(limit<=num){
+      arr.push(limit);
+    } else{return;}
+    
+  }
+  //repeat function until 'limit' number exceeds 'num'
+  //every time loop runs, it updates limit and at the end, number i is made equal to new limit
+  for(i=0; i < num; i=limit){
+    
+      fibo(num);
+  
+  }
+  
+ //filter out even numbers
+  var odd =arr.filter(function(x){
+    
+   return x % 2 !==0;
+    
+  });    
+    
+  //reduce array with odd number to one number
+  //drink beer and go vegan because it's cool, and good, and righteous, and it's freaking 2017, leave narrowminded traditions behind
+  return odd.reduce(function(total, number){
+    return total + number;
+  });
+}
+
+sumFibs(75025);
+
+
 // -------------------  12 ----- 
 // -------------------  12 ----- 
 // -------------------  12 ----- 
