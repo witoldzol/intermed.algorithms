@@ -529,6 +529,69 @@ function sumFibs(num) {
 sumFibs(75025);
 
 
-// -------------------  12 ----- 
+// -------------------  14 -----  find prime numbers
+
+
+function sumPrimes(num) {
+  //Sieve of Eratosthenes
+  //'simple' way to find prime number up to a defined point
+  // if I understand correctly, we need to set the sieve up to a square root of max possible prime number, ie 977sqr = 32(more or less)
+  
+  
+  arr = [];
+  //populate array with integers up to the limit (starting with 2 - 1 is not a prime number by definition)
+  for(i=2; i<=num; i++){
+    arr.push(i);
+  }
+ 
+ 
+  tem =[];  
+  function sieveOfEratosthenes(arr){
+    prime =[2];
+    test= arr;
+    divider = prime[prime.length-1];
+      
+    tem = test.filter(function(y){
+      return y % divider !== 0;
+    });
+    prime.push(tem[0]);
+    return test;
+  }
+
+  sieveOfEratosthenes(arr);
+ 
+  return prime;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  for(i=0;i<30;i++  ){
+    
+    
+     if (divider> num){
+       break;
+     } else{
+       sieveOfEratosthenes(arr);
+       
+     }
+     
+      
+    }
+  return prime;
+  
+}
+
+sumPrimes(10);
+ 
 // -------------------  12 ----- 
 // -------------------  12 ----- 
