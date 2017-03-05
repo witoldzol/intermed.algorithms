@@ -543,55 +543,79 @@ function sumPrimes(num) {
   for(i=2; i<=num; i++){
     arr.push(i);
   }
- 
- 
-  tem =[];  
-  function sieveOfEratosthenes(arr){
-    prime =[2];
-    test= arr;
-    divider = prime[prime.length-1];
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*
+  
+  function tt (){
+   for(i=1; i< 5; i++){ 
+    var prime =[2];
+    var divider = prime[prime.length-1];
+    arr = arr.filter(function(x){
+      return x % divider !== 0;
+    });
+   
+     prime.push(arr[i]);
+   }  
+   return arr;
+  }
+  tt(num);
+  
+  return arr;
+  
+  for(i=1; i< 60; i++){
+    var prime =[2];
+    var divider = prime[prime.length-1];
+    arr = arr.filter(function(x){
+      return x % divider !== 0;
+    });
+    if(arr[i]>num){
+      break;
+    } else{
+     prime.push(arr[i]);
+     
+    }
+     
+  }
       
-    tem = test.filter(function(y){
+  return arr.reduce(function(sum, num){
+    return sum + num;});
+  
+  function sieveOfEratosthenes(arr){
+      
+    test = test.filter(function(y){
       return y % divider !== 0;
     });
     prime.push(tem[0]);
     return test;
   }
-
-  sieveOfEratosthenes(arr);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  */
+  
+  
+  
+  
+  
  
-  return prime;
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  for(i=0;i<30;i++  ){
-    
-    
-     if (divider> num){
-       break;
-     } else{
-       sieveOfEratosthenes(arr);
-       
-     }
-     
-      
-    }
-  return prime;
-  
 }
 
-sumPrimes(10);
- 
+sumPrimes(977);
+
 // -------------------  12 ----- 
 // -------------------  12 ----- 
