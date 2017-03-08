@@ -530,92 +530,128 @@ sumFibs(75025);
 
 
 // -------------------  14 -----  find prime numbers
-
+// I obtained this function from http://stackoverflow.com/questions/11966520/how-to-find-prime-numbers-between-0-100
+// I couldn't come up with my own solution, so I analysed this one, and ow boy, it's so simple, yet so slick.
 
 function sumPrimes(num) {
-  //Sieve of Eratosthenes
-  //'simple' way to find prime number up to a defined point
-  // if I understand correctly, we need to set the sieve up to a square root of max possible prime number, ie 977sqr = 32(more or less)
   
-  
-  arr = [];
-  //populate array with integers up to the limit (starting with 2 - 1 is not a prime number by definition)
-  for(i=2; i<=num; i++){
-    arr.push(i);
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  /*
-  
-  function tt (){
-   for(i=1; i< 5; i++){ 
-    var prime =[2];
-    var divider = prime[prime.length-1];
-    arr = arr.filter(function(x){
-      return x % divider !== 0;
-    });
-   
-     prime.push(arr[i]);
-   }  
-   return arr;
-  }
-  tt(num);
-  
-  return arr;
-  
-  for(i=1; i< 60; i++){
-    var prime =[2];
-    var divider = prime[prime.length-1];
-    arr = arr.filter(function(x){
-      return x % divider !== 0;
-    });
-    if(arr[i]>num){
-      break;
-    } else{
-     prime.push(arr[i]);
-     
+  function getPrimes(max) {
+    var sieve = [];
+    var primes = [];
+    
+    //we start with outer loop, with i=2, as this is the first prime number
+    // ++i is not the same as i++, although in this case it makes no difference (from what i can tell)
+    //normally ++i would increment i before is is used (i++ would use i for operation, and increment after)
+    //since third operator in loop gets incremented after each iteration finishes, it makes no difference
+    for (i = 2; i <= max; ++i) {
+        //returns 'true' if sieve[i] is false, undefined or NaN
+        //if sieve[i] returns true, number or string it will return 'false' (because of ! negation)
+        if (!sieve[i]) {
+            // i has not been marked -- it is prime
+            primes.push(i);
+            //left shift <<
+            //Shifts 'i' in binary representation '1' (< 32) bits to the left, shifting in zeroes from the right
+            //no idea what that means, but it's a fancy way of doing Math.floor(i) * 2 essentially.
+            //if we changed to i << 2, it would turn into Math.floor(i) * 4 ... and so on
+            // we dont have to use << operator, it simply reduces number of unnecessary iterations
+            //
+            //we increment j by i on each iteration
+            for (j = i << 1; j <= max; j += i) {
+                //we set j as true, and each incrementation of j by i
+                //so if i =2, we will set all numbers divisible by 2 to 'true' / number / string 
+                //and hence they will be rejected in outer loop
+                sieve[j] = 'not prime';
+                
+            }
+          
+        }
     }
-     
-  }
-      
-  return arr.reduce(function(sum, num){
-    return sum + num;});
-  
-  function sieveOfEratosthenes(arr){
-      
-    test = test.filter(function(y){
-      return y % divider !== 0;
-    });
-    prime.push(tem[0]);
-    return test;
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  */
-  
-  
-  
-  
-  
- 
+    return primes;
 }
+ 
+  
+return  getPrimes(num).reduce(function(sum, num){
+  return sum+num;
+});
 
 sumPrimes(977);
 
-// -------------------  12 ----- 
+// -------------------  15 -----  smallest common multiple
+
+
+function smallestCommons(arr) {
+  
+  var prime =[2, 3, 5, 7, 11, 13, 17, 19, 23];
+  var first = arr[0];
+  var second = arr[1];
+  var test =[];
+  var test2 =[];
+  /*
+   for(i=0; i<prime.length;){
+  
+      if(first == 1){
+        
+        test.push(1);
+        break;
+        
+      } else if(first % prime[i] === 0){
+        
+        test.push(prime[i]);
+        
+        if(test.reduce(function(x,y){return x * y;}) / first === 1){
+          break;
+        } else {
+          //we update 'fist' to reminder of division of original number by prime factor
+          first = first / prime[i];
+            //once we found the prime factor, we check if we can divide it again by the same factor
+            //if yes, we do not increment i, and let the loop run again
+            // if it is not divisible, we increment
+            if(first % prime[i] !== 0){
+              ++i;
+            }
+        }
+      } 
+
+  }
+  */
+  
+ 
+   for(i=0; i<prime.length;){
+     
+    if(second == 1){
+      test2.push(1);
+      break;
+    } else {
+      
+      if(second % prime[i] === 0){
+        
+          test2.push(prime[i]);
+            if(test2.reduce(function(z,f){return z * f;}) / second === 1){
+              break;
+            }
+          second = second / prime[i];
+          if(!second % prime[i] === 0){
+            i++;
+          }
+      }
+      
+      
+      
+    }
+   
+  }
+
+ return test2;
+}
+  
+  
+  
+  
+  
+  
+
+
+smallestCommons([18,15]);
+
+
 // -------------------  12 ----- 
