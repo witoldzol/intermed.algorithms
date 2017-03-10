@@ -580,46 +580,46 @@ sumPrimes(977);
 
 
 function smallestCommons(arr) {
-  
+  //using only short array of prime numbers instead of generating them myself
   var prime =[2, 3, 5, 7, 11, 13, 17, 19, 23];
   var first = arr[0];
   var second = arr[1];
   var test =[];
   var test2 =[];
-  /*
+  
+  //first we need to find prime factors of each number
    for(i=0; i<prime.length;){
-  
-      if(first == 1){
-        
-        test.push(1);
-        break;
-        
-      } else if(first % prime[i] === 0){
-        
-        test.push(prime[i]);
-        
-        if(test.reduce(function(x,y){return x * y;}) / first === 1){
-          break;
-        } else {
-          //we update 'fist' to reminder of division of original number by prime factor
+     
+    if(first == 1){
+      break;
+    } else {
+      //if we can divide evenly, that means we found prime factor
+      if(first % prime[i] === 0){
+        //push prime number into holding array
+          test.push(prime[i]);
+            //check if all multiplications of prime numbers already add up to number we are factoring
+            if(test.reduce(function(z,f){return z * f;}) / first === 1){
+              break;
+            } else{
+          //if not, adjust the number we examine (get the rest after factoring)    
           first = first / prime[i];
-            //once we found the prime factor, we check if we can divide it again by the same factor
-            //if yes, we do not increment i, and let the loop run again
-            // if it is not divisible, we increment
-            if(first % prime[i] !== 0){
-              ++i;
-            }
-        }
-      } 
-
-  }
-  */
-  
- 
+              }
+          
+      }
+      //check if we can divide evenly with the same number again, if not, start iteration with i+1
+      if(first % prime[i] !== 0){
+            i++;
+          }
+      
+      
+      }
+   
+   }
+   //second loop for second number
    for(i=0; i<prime.length;){
      
     if(second == 1){
-      test2.push(1);
+      //test2.push(1);
       break;
     } else {
       
@@ -628,20 +628,35 @@ function smallestCommons(arr) {
           test2.push(prime[i]);
             if(test2.reduce(function(z,f){return z * f;}) / second === 1){
               break;
-            }
+            } else{
           second = second / prime[i];
-          if(!second % prime[i] === 0){
+              }
+          
+      }
+      if(second % prime[i] !== 0){
             i++;
           }
+      
       }
-      
-      
-      
-    }
    
+   }
+  
+  var wrapper =[test,test2];
+  var obj = {};
+  var obj2 = {};
+  //count instances of prime numbers in first array
+  for(i=0; i<test.length; i++){
+    obj[test[i]] = obj[test[i]] ? obj[test[i]]+1 : 1;
   }
-
- return test2;
+  //count instances of prime numbers in second array
+  for(i=0; i<test2.length; i++){
+    obj2[test2[i]] = obj2[test2[i]] ? obj2[test2[i]]+1 : 1;
+  }
+  
+  //compare both objects and select keys that have highest count, and insert them into final array
+  
+return obj2;
+ 
 }
   
   
@@ -652,6 +667,5 @@ function smallestCommons(arr) {
 
 
 smallestCommons([18,15]);
-
 
 // -------------------  12 ----- 
