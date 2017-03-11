@@ -578,7 +578,6 @@ sumPrimes(977);
 
 // -------------------  15 -----  smallest common multiple
 
-
 function smallestCommons(arr) {
   //using only short array of prime numbers instead of generating them myself
   var prime =[2, 3, 5, 7, 11, 13, 17, 19, 23];
@@ -641,21 +640,37 @@ function smallestCommons(arr) {
    
    }
   
-  var wrapper =[test,test2];
   var obj = {};
   var obj2 = {};
-  //count instances of prime numbers in first array
-  for(i=0; i<test.length; i++){
-    obj[test[i]] = obj[test[i]] ? obj[test[i]]+1 : 1;
+  var obj3 ={};
+  
+  //count instances of prime numbers in an array
+  function count(arr){
+    for(i=0; i<arr.length; i++){
+    obj[arr[i]] = obj[arr[i]] ? obj[arr[i]]+1 : 1;
+    }
   }
-  //count instances of prime numbers in second array
-  for(i=0; i<test2.length; i++){
-    obj2[test2[i]] = obj2[test2[i]] ? obj2[test2[i]]+1 : 1;
+  
+  count(test);
+  count(test2);
+  
+  objArr=[obj,obj2];
+
+  
+  for(i=0; i<objArr.length; i++){
+    
+    for(var prop in objArr[i]){
+      obj3[prop]=objArr[i][prop];
+    }
+    
   }
+  //return obj3;
+  return Object.keys(obj3);
   
   //compare both objects and select keys that have highest count, and insert them into final array
   
-return obj2;
+  
+ 
  
 }
   
@@ -666,6 +681,9 @@ return obj2;
   
 
 
-smallestCommons([18,15]);
+smallestCommons([18, 22]);
+
+
+
 
 // -------------------  12 ----- 
