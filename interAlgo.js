@@ -579,66 +579,85 @@ sumPrimes(977);
 // -------------------  15 -----  smallest common multiple
 
 function smallestCommons(arr) {
+  //sorted arr
+  var arr2=[];
+  //range of examined number that needs to be prime factorized
+  var arr3=[];
   //using only short array of prime numbers instead of generating them myself
   var prime =[2, 3, 5, 7, 11, 13, 17, 19, 23];
-  var first = arr[0];
-  var second = arr[1];
+ 
   var test =[];
   var test2 =[];
   
-  //first we need to find prime factors of each number
-   for(i=0; i<prime.length;){
-     
-    if(first == 1){
-      break;
-    } else {
-      //if we can divide evenly, that means we found prime factor
-      if(first % prime[i] === 0){
-        //push prime number into holding array
-          test.push(prime[i]);
-            //check if all multiplications of prime numbers already add up to number we are factoring
-            if(test.reduce(function(z,f){return z * f;}) / first === 1){
-              break;
-            } else{
-          //if not, adjust the number we examine (get the rest after factoring)    
-          first = first / prime[i];
-              }
-          
-      }
-      //check if we can divide evenly with the same number again, if not, start iteration with i+1
-      if(first % prime[i] !== 0){
-            i++;
+  
+  //order array, smallest to highest
+  arr2 = arr.sort(function(a,b){
+    return a-b;
+  });
+  
+  
+  //create array with numbers in the range
+  for(i=arr[0]; i<=arr[1]; i++){
+    arr3.push(i);
+    
+  }
+  
+  var arrFinal=[];
+
+   for(j=0; j < arr3.length; j++){
+     //we set this variable, because we will modify arr3[j] later on, and that broke loop after second iteration(line 44)
+     var divider = arr3[j];
+      //first we need to find prime factors of each number
+       for(i=0; i<prime.length;){
+  
+        if(arr[j] == 1){
+          break;
+        } else {
+          //if we can divide evenly, that means we found prime factor
+          if(arr3[j] % prime[i] === 0){
+            //push prime number into holding array
+             
+              test.push(prime[i]);
+              
+                //check if all multiplications of prime numbers already add up to number we are factoring
+                if(test.reduce(function(z,f){return z * f;}) / divider === 1){
+                  break;
+                } else{
+              //if not, adjust the number we examine (get the rest after factoring)    
+              arr3[j] = arr3[j] / prime[i];
+                  }
+
           }
-      
-      
-      }
-   
-   }
-   //second loop for second number
-   for(i=0; i<prime.length;){
-     
-    if(second == 1){
-      //test2.push(1);
-      break;
-    } else {
-      
-      if(second % prime[i] === 0){
-        
-          test2.push(prime[i]);
-            if(test2.reduce(function(z,f){return z * f;}) / second === 1){
-              break;
-            } else{
-          second = second / prime[i];
+          //check if we can divide evenly with the same number again, if not, start iteration with i+1
+          if(arr3[j] % prime[i] !== 0){
+                i++;
               }
-          
-      }
-      if(second % prime[i] !== 0){
-            i++;
+
+
           }
-      
-      }
-   
+          
+       }
+     //after we find prime factors for given number, we nest them as a separate array into 'arrFinal'
+     arrFinal.push(test);
+     //reset 'test' array for another iteration of outer loop
+     test =[];
    }
+  
+  //find a way to filter out the repeating prime numbers
+  //reduce
+  //gg
+   
+ 
+  
+  
+  
+  
+  
+  
+  
+ 
+  
+  
   
   var obj = {};
   var obj2 = {};
@@ -654,21 +673,29 @@ function smallestCommons(arr) {
   count(test);
   count(test2);
   
+  
+ 
+  
   objArr=[obj,obj2];
 
   
   for(i=0; i<objArr.length; i++){
     
     for(var prop in objArr[i]){
-      obj3[prop]=objArr[i][prop];
+      //obj3[prop]=objArr[i][prop];
+      if(obj3){
+        obj3[prop] = objArr[i][prop];
+      } 
+     
     }
+      
+      
+   }
     
-  }
-  //return obj3;
-  return Object.keys(obj3);
   
-  //compare both objects and select keys that have highest count, and insert them into final array
-  
+  return obj3;
+  //return Object.keys(obj3);
+ 
   
  
  
@@ -681,7 +708,8 @@ function smallestCommons(arr) {
   
 
 
-smallestCommons([18, 22]);
+smallestCommons([1, 13]);
+
 
 
 
