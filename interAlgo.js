@@ -643,7 +643,45 @@ function smallestCommons(arr) {
      test =[];
    }
   
-  //find a way to filter out the repeating prime numbers
+  //flatten the 'arrFinal'
+  var flat = arrFinal.reduce(function(a,b){
+                      return a.concat(b);                 
+                      });
+  
+  
+  
+  
+  //remove duplicates
+  
+  var arrT =[];
+  for(i=0; i<flat.length; i++){
+    var a =flat[i];
+    arrT[a] = arrT[a] ? a:a ;
+    
+  }
+  //array with unique prime numbers that we found during factorization
+  var keys = arrT.filter(function(a){
+    return a !== null;
+  });
+  
+  
+  //REWORK!
+  //create objects and assign property count
+  var obj={};
+  for(i=0; i<arrFinal.length; i++){
+    var b = arrFinal[i];
+    
+    for(j=0; j<arrFinal[i].length; j++){
+      var c = b[j];
+      obj[c] = obj[c] ? obj[c] + 1 : 1;
+  
+    }
+      }
+  return obj;
+  //now that we have objects with property counts
+  //all we have to do is select unique properties with highest counts
+ 
+  
   //reduce
   //gg
    
@@ -671,6 +709,7 @@ function smallestCommons(arr) {
   }
   
   count(test);
+  
   count(test2);
   
   
