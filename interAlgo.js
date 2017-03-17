@@ -651,7 +651,7 @@ function smallestCommons(arr) {
   
   
   
-  //remove duplicates
+  //remove duplicates from the flattened array
   
   var arrT =[];
   for(i=0; i<flat.length; i++){
@@ -659,98 +659,128 @@ function smallestCommons(arr) {
     arrT[a] = arrT[a] ? a:a ;
     
   }
-  //array with unique prime numbers that we found during factorization
+  
+  //lets remove invalid entries, and now we have array with unique prime numbers that we found during factorization
   var keys = arrT.filter(function(a){
     return a !== null;
   });
   
   
-  //REWORK!
-  //create objects and assign property count
-  var obj={};
-  for(i=0; i<arrFinal.length; i++){
-    var b = arrFinal[i];
-    
-    for(j=0; j<arrFinal[i].length; j++){
-      var c = b[j];
-      obj[c] = obj[c] ? obj[c] + 1 : 1;
   
-    }
+  //array to hold MAX count of given prime number
+  var g = [];
+  
+  
+  //loop through array with unique prime numbers
+  keys.forEach(function(key){
+    
+    //outer array to hold counts of prime numbers 
+    var h = [];
+    //loop through nested array
+    for(i=0; i<arrFinal.length; i++){
+      var c = arrFinal[i];
+      //we define count variable
+      var count = 0;
+      
+      //loop that goes through each element in nested array
+      //we compare 'element' from 'keys array' to each element in nested array, if it matches, we increment count by 1
+      for(j=0; j<c.length; j++){
+          var d = c[j];
+          if(d==key){
+            count++;
+          }
       }
-  return obj;
-  //now that we have objects with property counts
-  //all we have to do is select unique properties with highest counts
- 
-  
-  //reduce
-  //gg
-   
- 
-  
-  
-  
-  
-  
-  
-  
- 
-  
-  
-  
-  var obj = {};
-  var obj2 = {};
-  var obj3 ={};
-  
-  //count instances of prime numbers in an array
-  function count(arr){
-    for(i=0; i<arr.length; i++){
-    obj[arr[i]] = obj[arr[i]] ? obj[arr[i]]+1 : 1;
+      //once we have count of given key for given nested array, we push it to a holding array
+      h.push(count);
+      //we need to reset count before running next iteration
+      count =0;
     }
-  }
-  
-  count(test);
-  
-  count(test2);
-  
-  
- 
-  
-  objArr=[obj,obj2];
-
-  
-  for(i=0; i<objArr.length; i++){
-    
-    for(var prop in objArr[i]){
-      //obj3[prop]=objArr[i][prop];
-      if(obj3){
-        obj3[prop] = objArr[i][prop];
-      } 
-     
-    }
+      //using the spread operator we can access array via arguments? or something, I dont really remember
+      //we find the highest number.
+      //this number is the max factor of given prime number (we need max numbers, so we can multiply them and reject lower //counts - read on prime factorization if you forgot why I've done this in the first place)
+      var n = Math.max(...h);
+      //now we know how many times we need to multiply given 'key' by itself
+      //lets use power method .pow(number, toPower)
+      //also lets push it into final holding array (we have a lot of these here)
+      g.push(Math.pow(key,n));
       
-      
-   }
-    
+  });
+  //finally, lets multiply all the contents (prim factors of original numbers to nTh power)
+  //DONE! 
+  return g.reduce(function(x,y){
+    return x *y;
+  });
   
-  return obj3;
-  //return Object.keys(obj3);
- 
-  
- 
- 
 }
   
-  
-  
-  
-  
-  
-
 
 smallestCommons([1, 13]);
 
 
 
+// -------------------  16 -----   FLATTEN ARRAYS
+
+function steamrollArray(arr) {
+
+  
+  //lets create a wrapping function, which we can call during .reduce method
+  var test = function (arr) {
+    //standard reduce method
+    return arr.reduce(function(a,b){
+      //ternary operator for brevity, 
+      //we test if current element is an array
+      //our goal is to pass only values, not arrays 
+      //if we get 'true', we need to reduce it further, so we pass the currently tested element through our function until         //we fail Array.isArray test-- in that case, we pass this value into defined array (empty array)
+      return a.concat(Array.isArray(b) ? test(b) : b);
+      // ',[]' -- this is an initial value for first element, if we don't specify it, first element in the array would be         //used( and we dont want that because, if the first element is a nested array itself, it will not get reduced to a           //value)
+    },[]);
+    
+  };
+  
+  
+  
+  //just to  be clear, I WOULD NEVER THOUGHT OF IT ON MY OWN. I've discovered (euphemizm for plagiarizm) this method on 
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
+  return test(arr);
+
+}
+
+steamrollArray([[["a"]], [["b"]]]);
+
+// -------------------  17 ----- translate binary code to ascii
+function binaryAgent(str) {
+  //binary code rules
+  // 0010000 - space
+  // 0010110 - comma
+  // 01      - CAPITAL letters
+  // 011     - lower case letters
+  // 0011    - digits
+  
+  
+  var arr =str.split("");
+  return arr;
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  return str;
+}
+
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
 
 
-// -------------------  12 ----- 
+// -------------------  16 ----- 
+// -------------------  16 ----- 
+// -------------------  16 ----- 
+// -------------------  16 ----- 
+// -------------------  16 ----- 
+// -------------------  16 ----- 
