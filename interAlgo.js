@@ -748,38 +748,135 @@ function steamrollArray(arr) {
 steamrollArray([[["a"]], [["b"]]]);
 
 // -------------------  17 ----- translate binary code to ascii
+
+
 function binaryAgent(str) {
   //binary code rules
-  // 0010000 - space
-  // 0010110 - comma
-  // 01      - CAPITAL letters
-  // 011     - lower case letters
-  // 0011    - digits
+  // 10000000 - 128
+  // 01000000 - 64
+  // 00100000 - 32
+  // 00010000 - 16
+  // 00001000 - 8
+  // 00000100 - 4
+  // 00000010 - 2
+  // 00000001 - 1
   
-  
-  var arr =str.split("");
-  return arr;
+  //lets split or string so we can iterate over it easily
+  var arr = str.split(" ");
+  //declare holding array 
+  var result= [];
+  //function that iterates over 8 characters, and if any character is equal to 1
+  //it calculates the value based on the position in the 8 character chain
+  function binary(x){
+    //set the count to 0
+    var count =0;
+    //iterate over the 8 char chain.
+    for(i=0; i<=7; i++){
+      // 2 to 7th power = 128, so all we have to do, is decrease power with each iteration
+      //by one, and add up all results to get charCode for given bit
+      var n = (7-i);
+      //if we have '1'
+      if(x.charCodeAt(i)==49){
+        //the further we go in the iterations, the lower the 'n' value gets
+        //up to n =0 which always gives '1'
+        count = count + Math.pow(2,n);
+        
+      }
+    }
+    //once we get a 'result', which is an ascii code equivalent, we can convert it to 
+    //normal character and push it into our holding array
+    result.push(String.fromCharCode(count));
+    
+  }
+  //lets iterate over main array and apply our function to each element
+  for(j=0; j<arr.length; j++){
+    binary(arr[j]);   
+  }
+  //convert holding array to a string
+  //get a beer
+  return result.join("");
  
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  return str;
 }
 
 binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
 
 
-// -------------------  16 ----- 
-// -------------------  16 ----- 
+
+// -------------------  18 ----- 
+
+
+function truthCheck(collection, pre) {
+  
+  
+  
+  function sexy(x){
+    //lets define inner ternary operator for clarity
+    //if(value) will return 'true' for primitive values, 'false' for NaN, undefined, 0, ""
+    //this simple test will tell us if the property has valid value
+    var inner = (collection[x][pre]) ? true : false;
+    //first we test if the property exists for the object 'x'(x will be loop index)
+    return collection[x].hasOwnProperty(pre)  ? inner : false; 
+  }  
+
+  
+  //we wrap loop in function, if the loop will not return 'false', than we can return 'true' once it finishes 
+  function test (){
+    for(i=0; i<collection.length; i++){
+      //we test if loop returns at any point 'false', if it does, we can return 'false' and be done with it
+      if(!sexy(i)){
+        return false;
+      }
+    
+    }
+    //if the loop didn't brake prematurely, we can return 'true' (thats why we included loop in a wrapper function)
+    return true;
+  }
+  //call the function, get a beer and ponder meaning of life
+  return test();
+}
+
+truthCheck([{"user": "Tinky-Winky", "sex": "dsaj"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
+
+// -------------------  19 ----- closures, test for undefined values
+
+//we define arguments in outside function as 'x' & 'y' // not sure if we have to...
+function addTogether(x,y) {
+  
+ 
+  //first test if isNaN, if false (ie. it is a number), multiply arguments by 1, and strict compare to original args,
+  //even if "2" passess first isNaN test, it will fail strict comparison test. 
+  
+  
+  //first, lets test if we have more than one argument, if we do, just return sum of arguments
+  if(arguments.length > 1 ){
+          console.log(!isNaN(arguments[0]));
+          if(isNaN(arguments[0])){
+                return "undefined";
+              } else if (isNaN(arguments[1])){
+                return "undefined";
+              } else {
+                return x+y;
+              }
+          
+      
+  } else {
+    //RETURN function, because we have closure, first argument (x) will be preserved in memory,
+    //once the function is returned, it executes, taking in second argument(y), and adding it to the first one (x)
+    return function add (y){
+      return x +y;
+    };
+    
+  }
+  
+  
+  
+  
+  
+}
+
+addTogether("2",3);
+
 // -------------------  16 ----- 
 // -------------------  16 ----- 
 // -------------------  16 ----- 
