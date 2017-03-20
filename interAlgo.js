@@ -877,7 +877,58 @@ function addTogether(x,y) {
 
 addTogether("2",3);
 
-// -------------------  16 ----- 
-// -------------------  16 ----- 
-// -------------------  16 ----- 
-// -------------------  16 ----- 
+// -------------------  20 ----- closures, return function, test for non numbers
+
+//we define arguments in outside function as 'x' & 'y' // not sure if we have to...
+function addTogether(x,y) {
+  
+ 
+  //lets define z for brevity in future
+  var z = arguments;
+  //function that will check if argument multiplied by '1' will return the same result
+  //if value is other than primitive number, js will 'massage' the value to make the multiplication possible
+  //so if we compare it after multiplication, using strict comparison (===), we can test if value is a number or not
+  function check (z){
+    //i didn't use loop (only two values, so I feel it's clearer this way) 
+    if((z[0]*1) !== z[0]){
+      return undefined;
+    } else if((z[1]*1) !== z[1]){
+      return undefined;
+    } 
+    //if both arguments pass the test, we can return addition
+    return x + y;
+    
+  }
+  
+  
+  //we will call the 'check' function only if there are two arguments
+  if(arguments.length > 1 ){
+     //my initial mistake was calling the function...without 'return', it took me TWO DAYS to figure out why the goddamn function
+    //didn't do what it was suppouse to do...seriously..
+     return check(z);
+    
+    //if we have only one argument  
+  } else {
+    //all we have to do is to test if first argument is a 'NaN' (this is very weak test, I'm using it to weed out strings etc)
+    if(isNaN(z[0])){
+      return undefined;
+    }
+    
+    //RETURN function, because we have closure, first argument (x) will be preserved in memory,
+    //once the function is returned, it executes, taking in second argument(y), and adding it to the first one (x)
+    return function add (y){
+      //we test second argument only if we include test in returned function(we have no access to 'y' at first iteration)
+      if(y*1 !== y){
+        return undefined;
+      }
+    
+      return x +y;
+    };
+    
+  }
+  
+}
+
+addTogether(2, "3");
+
+//--------------------------------------************   END OF INTERMEDIATE ALGORITHMS    *********-----------------------------
